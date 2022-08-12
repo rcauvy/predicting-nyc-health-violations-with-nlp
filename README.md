@@ -64,15 +64,15 @@ After gather all the data, removing duplicates and dropping restaurants without 
 ## Exploring The Dataset
 
 
-![Map](images/restaurant_map.jpeg)
+![Map](images/restaurant_map.png)
 
-![Features](images/target_v_features.jpeg)
+![Features](images/target_v_features.png)
 
 
 ### Exploring The Text Data
-![Text_Freq](images/freq_text.jpeg)
-neg_wc
-pos_wc
+![Text_Freq](images/freq_text.png)
+![Positive Wordcloud](images/neg_wc.png)
+![Negative Wordcloud](images/pos_wc.png)
 
 
 ## NLP Modeling
