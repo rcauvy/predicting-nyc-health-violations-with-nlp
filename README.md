@@ -69,6 +69,7 @@ After gather all the data, removing duplicates and dropping restaurants without 
 ![Features](images/target_v_features.png)
 
 
+
 ### Exploring The Text Data
 ![Text_Freq](images/freq_text.png)
 ![Positive Wordcloud](images/neg_wc.png)
