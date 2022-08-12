@@ -18,30 +18,73 @@ The New York Health Department inspects the approximately 27,000 restaurants wit
 
 ## The Data
 
-For this project there will be two sources and types of data used:
+This project utilises 3 data sources:
+* Historical health and hygiene inspections recorded by New York City Department of Health and Mental Hygiene (DOHMH) public health inspectors
+* Yelp API business data and ratings 
+* Yelp user generateda reviews
 
-Historical health and hygiene inspections recorded by New York City Department of Health and Mental Hygiene (DOHMH) public health inspectors
-User generated Yelp business ratings and reviews
-This project requires data pulled from two different sources, the City of New York and Yelp. To obtain the data we will call the API keys.
 
-The dataset contains every sustained or not yet adjudicated violation citation from every full or special program inspection conducted up to three years prior to the most recent inspection for restaurants and college cafeterias in an active status on the RECORD DATE (date of the data pull). When an inspection results in more than one violation, values for associated fields are repeated for each additional violation record. Establishments are uniquely identified by their CAMIS (record ID) number. Keep in mind that thousands of restaurants start business and go out of business every year; only restaurants in an active status are included in the dataset. Records are also included for each restaurant that has applied for a permit but has not yet been inspected and for inspections resulting in no violations. Establishments with inspection date of 1/1/1900 are new establishments that have not yet received an inspection. Restaurants that received no violations are represented by a single row and coded as having no violations using the ACTION field. Because this dataset is compiled from several large administrative data systems, it contains some illogical values that could be a result of data entry or transfer errors. Data may also be missing. This dataset and the information on the Health Department’s Restaurant Grading website come from the same data source. The Health Department’s Restaurant Grading website is here: http://www1.nyc.gov/site/doh/services/restaurant-grades.page
 
-Why does the Health Department inspect restaurants? The Health Department inspects the approximately 27,000 restaurants in New York City to monitor their compliance with food safety regulations. Inspectors observe how food is prepared, served and stored and whether restaurant workers are practicing good hygiene. They check food temperatures, equipment maintenance and pest control measures.
 
-Since 2010, New York City has required restaurants to post letter grades that correspond to scores received from sanitary inspections. An inspection score of 0 to 13 is an A, 14 to 27 points is a B, and 28 or more points is a C. Grade cards must be posted where they can easily be seen by people passing by.
+### New York Open Data
 
-The New York City Health Department inspects all food service establishments to make sure they meet Health Code requirements, which helps prevent foodborne illness. How often a restaurant is inspected depends on its inspection score. Restaurants that receive a low score on the initial or first inspection in the inspection cycle are inspected less often than those that receive a high score.
-
-The points for a particular violation depend on the health risk it poses to the public. Violations fall into three categories:
-
-A public health hazard, such as failing to keep food at the right temperature, triggers a minimum of 7 points. If the violation can’t be corrected before the inspection ends, the Health Department may close the restaurant until it’s fixed.
-A critical violation, for example, serving raw food such as a salad without properly washing it first, carries a minimum of 5 points.
-A general violation, such as not properly sanitizing cooking utensils, receives at least 2 points.
-Inspectors assign additional points to reflect the extent of the violation. A violation’s condition level can range from 1 (least extensive) to 5 (most extensive). For example, the presence of one contaminated food item is a condition level 1 violation, generating 7 points. Four or more contaminated food items is a condition level 4 violation, resulting in 10 points.
-
-How are restaurants graded? Violations found during inspections carry point values, and a restaurant’s score corresponds to a letter grade. The point/grade cut-offs are the same as for mobile food vending letter grading, with fewer points corresponding to a better grade:
+Since 2010, New York City has required restaurants to post letter grades that correspond to scores received from sanitary inspections.Since 2010, New York City has required restaurants to post letter grades that correspond to scores received from sanitary inspections.
 
 "A" grade: 0 to 13 points for sanitary violations
 "B" grade: 14 to 27 points for sanitary violations
 "C" grade: 28 or more points for sanitary violations
-The City of New York inspects all restaurants cyclically. And if a business does not pass it's initial inspection for the cycle, it will be re-inspected in 3-5 months.
+
+
+This dataset and the information on the Health Department’s Restaurant Grading website come from the same data source. The Health Department’s Restaurant Grading website is here: http://www1.nyc.gov/site/doh/services/restaurant-grades.page
+
+The dataset used in this project can be viewed and downloaded  here:
+
+https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j
+
+Detailed descriptions about each column can be found in the Restaurant Inspection Data Dictionary.
+
+### Yelp Business Data
+
+You can sign up for access and obtain credentials to the Yelp API here: 
+https://www.yelp.com/developers/documentation/v3
+
+We call the Yelp API at the Phone Search Endpoint for all the numbers in the phone_numbers list tht correspond to the businesses from the NYC dataset to gather details about each indivdual business such as their ratings and Yelp page urls. 
+However the API only allows 5000 callers per day so we'll slice the list into smaller list.
+
+
+### Yelp Review Data
+
+Now that all the restaurants from the NYC DOHMH dataset have been used to search the Yelp API and have been concatenated we can use the return url to gather reviews for each business using BeautifulSoup to web scrape the text from the front page of each businesses Yelp site.
+
+
+### Joining The Data
+After gather all the data, removing duplicates and dropping restaurants without reviews, we are left with 13,061 unique businesses
+
+
+## Exploring The Dataset
+
+
+![Map](images/restaurant_map.jpeg)
+
+![Features](images/target_v_features.jpeg)
+
+
+### Exploring The Text Data
+![Text_Freq](images/freq_text.jpeg)
+neg_wc
+pos_wc
+
+
+## NLP Modeling
+
+### Bag-Of-Words
+
+#### Count Vectorizer
+
+#### Tdf_idf
+
+### Deep NLP
+
+#### Word2Vec
+#### Pretrained gloVe
+
