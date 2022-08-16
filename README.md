@@ -63,15 +63,24 @@ After gather all the data, removing duplicates and dropping restaurants without 
 
 ## Exploring The Dataset
 
-
+One of the first things I wanted to look at was if there were any hotspots, or locations of businesses with a dense rate for of failing their inspections. The map below is every business in the dataset plotted in blue if they have never failed a health and safety inspection and red if they have.
 ![Map](images/restaurant_map.png)
+The map above shows it is very difficult to extract any insight from  location. Net lets see if any other features in the dataset can have an impact on the target variable.
 
 ![Features](images/target_v_features.png)
+The plots above show the categorical variables(Yelp Rating, NYC Boro, Price($$$$),'Delivery','Takeout','Reservations') against the target variable. Again, its very deficult to extract clear indicators from the data. It's interesting that restaurants with the highest and lowest ratings had the lower rate of failed inspections compared to restaurants rated between 4.0-2.0 stars. This also appears in the Price($) column, where businesses that are $$/$$$ do worse that $/$$$$. It could be a worthwhile exercise to dive deeper into the analytics but on the surface level its hard to find a correlation between a restaurants features and their inspection scores. 
 
+This project will attempt to leverage text data to answer the questions the categorical data could not. Let
+explore the text data collected from the scraped reveiws. 
 
 
 ### Exploring The Text Data
+
+After lightly processing the text, we'll examine some of the word frequencies and compare the reviews from the restaurants that have passed all their inspections and those that haven't.
 ![Text_Freq](images/freq_text.png)
+Aside from some slight differences in order, these word frequencies are nearly identical.
+Here's another visualiztion of the word frequencies in the Wordcloud form. It's easier to see how similar the vocabulary used by reviewers.
+
 ![Positive Wordcloud](images/neg_wc.png)
 ![Negative Wordcloud](images/pos_wc.png)
 
@@ -79,13 +88,45 @@ After gather all the data, removing duplicates and dropping restaurants without 
 ## NLP Modeling
 
 ### Bag-Of-Words
+After the EDA phase all columns except for the text reviews and target variable were dropped and the data set was separated into a train test split. Next the split data sets went through sci-kit learns Pipelines to streamline prepocessing and models phases. A select handful of sci-kit learn classififiers were selected for this problem. These classifiers include Naive Bayes, Logistic Regression, Descion Trees and Support Vector Classifiers. 
 
-#### Count Vectorizer
+#### Model Evaluation
 
-#### Tdf_idf
+Because the objective of this project is to flag restaurants that are likely to fail their health inspections the metric we will be optimizing for is Recall because we need our model to find all of the restaurants that pose a risk to public health. This metric is defined by the number of true positives divided by true positives and false negatives. If our model mistakenly classifies a clean kitchen as unsafe, the consequence of sending an inspector to check on it is much less worse than the alternative of classifying an unsafe establishment as clean. The Accuracy measurement, scoring how many times the model correctly predicted is a good indicator of performance but not as suitable as recall because of this business case AND because of our class imbalance. That is to say, since only 30% of our businesses are flagged. If our model predicts every restaurant will pass its inspection, it will be correct 70%.
+
+#### Best Results
+
 
 ### Deep NLP
 
 #### Word2Vec
 #### Pretrained gloVe
+
+
+## Conclusions
+
+### Next Steps
+
+## Further Review And Analysis
+
+This porject was limisted by the features of this dataset. All of the columns were discrete, categorical variables. I believe the logistic regression and tree based models would have performed much better are predicting vaccines if they had continuous data for some features.
+
+### For further information
+Please review the narrative of the analysis in [this jupyter notebook](./Predicting NYC Health Violations.ipynb) or review the [presentation](./Phase_5_Project.pdf)
+
+For any additional questions, please contact **rcauvy@gmail.com
+
+
+##### Repository Structure:
+
+
+```
+
+├── README.md                              <- The top-level README for reviewers of this project
+├── Predicting NYC Health Violations.ipynb <- Narrative documentation of analysis in jupyter notebook
+├── Phase_5_Project.pdf                    <- pdf version of project presentation
+└── images                                 <- Both sourced externally and generated from code
+└── data                                   <- Internally and Externally sourced data
+
+```
 
