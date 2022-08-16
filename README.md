@@ -96,20 +96,32 @@ Because the objective of this project is to flag restaurants that are likely to 
 
 #### Best Results
 
+The model that best solved the business problem was the DecisionTree classifier 53% Accuracy / 65% Recall. This displayed th e highest Recall score of all the models that were trained. Aside from achieve the bets score for the most important metric, the Decision Tree also has a handful of attributes that make it very well suited for this business problem. First, it is highly interpretable. Meaning we can see how the classifier branched its decisions. We can also get probabilities for predictions, which may actually better serve our stakeholders so that they can then prioritize which restaurants must be inspected first. Additional
+this classifier is robust to overfitting of all the models trained, this had the lowest difference between the training data and validation set. This gives us confidence that it isn't reacting to much to the noise in the data and will perform as expected with new data the model hasn't yet seen. And lastly, this project works with a large amount of data and training and tuning some of the more complex models takes a significant amount of time and is computationally expensive. This model was one of the most efficient.
 
-### Deep NLP
-
-#### Word2Vec
-#### Pretrained gloVe
 
 
 ## Conclusions
 
 ### Next Steps
+*Revisit Target Variable
+*Preprocessing methods
+*Hyperparameter Tuning
+*Deep NLP Methods
+*Deploy model for public use
+*Target Restaurant Stakeholders
+
+
 
 ## Further Review And Analysis
 
 This porject was limisted by the features of this dataset. All of the columns were discrete, categorical variables. I believe the logistic regression and tree based models would have performed much better are predicting vaccines if they had continuous data for some features.
+
+### Appendix -- Deep NLP
+
+#### Word2Vec
+#### Pretrained gloVe
+
 
 ### For further information
 Please review the narrative of the analysis in [this jupyter notebook](./Predicting NYC Health Violations.ipynb) or review the [presentation](./Phase_5_Project.pdf)
